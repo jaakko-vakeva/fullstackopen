@@ -1,0 +1,18 @@
+note over selain
+kun lomake submitataan:
+selaimen lataaman js-oodin mukaisesti tapahtumankäsittelijä kutsuu metodia e.preventDefault()
+tämä estää lomakkeen lähetyksen oletusarvoisen toiminnan
+tämän jälkeen tapahtumankäsittelijä luo uuden muistiinpanon ja piirtää muistiinpanojen listan uudelleen,
+ja lähettää uuden muistiinpanon palvelimelle jso-muodossa POST-pyyntönä
+end note
+
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note over palvelin
+pyynnön header Content-Type kertoo että pyynnön mukana tuleva data on JSON-muotoista,
+ja palvelin parsii pyynnön mukana tulevan datan
+
+palvelin vastaa selaimelle statuskoodilla 201, että uusi resurssi on luotu
+end note
+
+palvelin-->selain: status code 201 created
