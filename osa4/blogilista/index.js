@@ -4,6 +4,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
+const logger = require('./utils/logger')
 
 const password = process.argv[2]
 
@@ -33,7 +34,7 @@ app.get('/api/blogs', (request, response) => {
 })
 
 app.get('/', (request, response) => {
-  console.log("Hello world")
+  logger.info("Hello world")
 })
 
 
@@ -49,5 +50,5 @@ app.post('/api/blogs', (request, response) => {
 
 const PORT = 3003
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+  logger.info(`Server running on port ${PORT}`)
 })
