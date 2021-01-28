@@ -1,17 +1,14 @@
-const dotenv = require('dotenv')
-dotenv.config()
-
 const http = require('http')
 const express = require('express')
 const app = express()
+const config = require('./utils/config')
 
 
 const cors = require('cors')
 const mongoose = require('mongoose')
 const logger = require('./utils/logger')
-const config = require('./utils/config')
 
-const url = process.env.MONGODB_URI
+const url = config.MONGODB_URI
 
 
 const blogSchema = mongoose.Schema({
@@ -53,5 +50,5 @@ app.post('/api/blogs', (request, response) => {
 
 const PORT = 3003
 app.listen(PORT, () => {
-  logger.info(`Server running on port ${process.env.PORT}`)
+  logger.info(`Server running on port ${config.PORT} url: ${config.MONGODB_URI}`)
 })
