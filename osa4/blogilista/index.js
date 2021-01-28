@@ -1,14 +1,17 @@
-require('dotenv').config
+const dotenv = require('dotenv')
+dotenv.config()
+
 const http = require('http')
 const express = require('express')
 const app = express()
+
+
 const cors = require('cors')
 const mongoose = require('mongoose')
 const logger = require('./utils/logger')
+const config = require('./utils/config')
 
-const password = process.argv[2]
-
-const url = `mongodb+srv://jaakko:${password}@cluster1.js72j.mongodb.net/blog-app?retryWrites=true&w=majority`
+const url = process.env.MONGODB_URI
 
 
 const blogSchema = mongoose.Schema({
@@ -50,5 +53,5 @@ app.post('/api/blogs', (request, response) => {
 
 const PORT = 3003
 app.listen(PORT, () => {
-  logger.info(`Server running on port ${PORT}`)
+  logger.info(`Server running on port ${process.env.PORT}`)
 })
