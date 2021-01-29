@@ -2,25 +2,13 @@ const http = require('http')
 const express = require('express')
 const app = express()
 const config = require('./utils/config')
-
-
-const cors = require('cors')
-const mongoose = require('mongoose')
 const logger = require('./utils/logger')
 
-const url = config.MONGODB_URI
+const cors = require('cors')
 
 
-const blogSchema = mongoose.Schema({
-  title: String,
-  author: String,
-  url: String,
-  likes: Number
-})
+const Blog = require('./models/blog')
 
-const Blog = mongoose.model('Blog', blogSchema)
-
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
 app.use(cors())
 app.use(express.json())
