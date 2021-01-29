@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs/
 Content-Type: application/json
 
 {
-    "title": "Jaakko matkustaa",
-    "author": "Jaakko Vakeva",
-    "url": "www.iltalehti.fi",
-    "likes": 19
+    "title": "Boii",
+    "author": "JBOi",
+    "url": "www.iltalehti.com",
+    "likes": 12
 }

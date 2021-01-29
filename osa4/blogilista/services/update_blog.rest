@@ -1,0 +1,9 @@
+PUT http://localhost:3003/api/blogs/60141a2cfc413e3ee8756968
+Content-Type: application/json
+
+{
+    "title": "Boidsi",
+    "author": "JBOi",
+    "url": "www.iltalehti.com",
+    "likes": 15
+}
