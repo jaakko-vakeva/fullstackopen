@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs/
 Content-Type: application/json
 
 {
-    "title": "Boii",
-    "author": "JBOi",
-    "url": "www.iltalehti.com",
-    "likes": 12
+    "title": "fdsfdsffadssd",
+    "author": "JBfdsdsaOi",
+    "url": "www.ilfdtfsdaalehti.com",
+    "likes": 12321
 }
