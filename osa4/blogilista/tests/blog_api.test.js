@@ -1,44 +1,20 @@
 const mongoose = require('mongoose')
 const supertest = require('supertest')
+const helper = require('./test_helper')
 const app = require('../app')
 const api = supertest(app)
 
 const Blog = require('../models/blog')
-const initialBlogs = [
-  {
-    title: "Jaakko koodaa Full Stackia",
-    author: "Jaakko",
-    url: "http://www.fullstackopen.com",
-    like: 1,
-  },
-  {
-    title: "12 Rules for Life",
-    author: "Jordan Peterson",
-    url: "http://www.youtube.com",
-    like: 69,
-  },
-  {
-    title: "Matti Nykänen söi kolme litraa mansikoita",
-    author: "Mansikka Matti",
-    url: "https://www.is.fi/viihde/art-2000000214135.html",
-    like: 100,
-  },
-  {
-    title: "Koirat",
-    author: "Pluto",
-    url: "https://wikipedia.org",
-    like: 3,
-  },
-]
+
 beforeEach(async () => {
   await Blog.deleteMany({})
-  let blogObject = new Blog(initialBlogs[0])
+  let blogObject = new Blog(helper.initialBlogs[0])
   await blogObject.save()
-  blogObject = new Blog(initialBlogs[1])
+  blogObject = new Blog(helper.initialBlogs[1])
   await blogObject.save()
-  blogObject = new Blog(initialBlogs[2])
+  blogObject = new Blog(helper.initialBlogs[2])
   await blogObject.save()
-  blogObject = new Blog(initialBlogs[3])
+  blogObject = new Blog(helper.initialBlogs[3])
   await blogObject.save()
 })
 
@@ -49,10 +25,10 @@ test('returns blogs in json', async () => {
   .expect('Content-Type', /application\/json/)
 })
 
-test('there are right amount of blogs blogs', async () => {
+test('all blogs are returned', async () => {
   const response = await api.get('/api/blogs')
 
-  expect(response.body).toHaveLength(initialBlogs.length)
+  expect(response.body).toHaveLength(helper.initialBlogs.length)
 })
 
 test('returned blogs have an identification field called id', async () => {
@@ -70,16 +46,15 @@ test('a valid blog can be added', async () => {
     likes: 4,
   }
 
-  const previousLength = initialBlogs.length
-
   await api
     .post('/api/blogs')
     .send(newBlog)
     .expect(200)
     .expect('Content-Type', /application\/json/)
 
-  const response = await api.get('/api/blogs')
-  expect(response.body).toHaveLength(previousLength + 1)
+  const blogsAtEnd = await helper.blogsInDb()
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
+
 })
 
 
@@ -97,7 +72,7 @@ test('if likes field is not given a value it is set to zero', async () => {
     .expect('Content-Type', /application\/json/)
 
   const response = await api.get('/api/blogs')
-  expect(response.body[initialBlogs.length].likes).toEqual(0)
+  expect(response.body[helper.initialBlogs.length].likes).toEqual(0)
 })
 
 test('if title or author is empty return 400 bad request', async () => {

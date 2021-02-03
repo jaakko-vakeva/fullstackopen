@@ -2,8 +2,9 @@ POST http://localhost:3003/api/blogs/
 Content-Type: application/json
 
 {
-    "title": "Jaakko koodaa Full Stackia",
-    "author": "Jaakko",
-    "url": "http://www.fullstackopen.com",
-    "like": 1
+    "title": "Kaikki Vitun Hitit 2",
+    "author": "Petri",
+    "url": "http://www.youtube.com",
+    "likes": "420",
+    "userId": "601add89c0bf4f03b8d565f8"
 }
