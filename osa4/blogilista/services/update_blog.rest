@@ -1,9 +1,9 @@
-PUT http://localhost:3003/api/blogs/60141a2cfc413e3ee8756968
+PUT http://localhost:3003/api/blogs/601a9d394e9fed2480a1a996
 Content-Type: application/json
 
 {
-    "title": "Boidsi",
-    "author": "JBOi",
-    "url": "www.iltalehti.com",
-    "likes": 15
+    "title": "Jaakko koodaa Full Stackia",
+    "author": "Jaakko",
+    "url": "https://www.fullstackopen.com",
+    "likes": 5
 }

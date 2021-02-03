@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs/
 Content-Type: application/json
 
 {
-    "title": "fdsfdsffadssd",
-    "author": "JBfdsdsaOi",
-    "url": "www.ilfdtfsdaalehti.com",
-    "likes": 12321
+    "title": "Jaakko koodaa Full Stackia",
+    "author": "Jaakko",
+    "url": "http://www.fullstackopen.com",
+    "like": 1
 }

@@ -8,7 +8,7 @@ if (process.argv.length<3) {
 const password = process.argv[2]
 
 const url =
-  `mongodb+srv://jaakko:${password}@cluster1.js72j.mongodb.net/blog-app?retryWrites=true&w=majority`
+  `mongodb+srv://jaakko:${password}@cluster1.js72j.mongodb.net/blog-app-test?retryWrites=true&w=majority`
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
@@ -22,10 +22,10 @@ const blogSchema = new mongoose.Schema({
 const Blog = mongoose.model('Blog', blogSchema)
 
 const blog = new Blog({
-  title: 'Jaakko koodaa',
-  author: 'Jaakko',
-  url: 'www.iltalehti.fi',
-  likes: 5
+  title: '12 Rules for Life',
+  author: 'Jordan Peterson',
+  url: 'youtube.com',
+  likes: 17
 })
 
 blog.save().then(response => {
