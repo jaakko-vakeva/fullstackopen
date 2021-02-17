@@ -5,6 +5,13 @@ const app = require('../app')
 const api = supertest(app)
 
 const Blog = require('../models/blog')
+const User = require('../models/user')
+
+const user = new User({
+  "username": "jaakko",
+  "name": "Jaakko",
+  "password": "vakeva"
+})
 
 beforeEach(async () => {
   await Blog.deleteMany({})
@@ -16,6 +23,25 @@ beforeEach(async () => {
   await blogObject.save()
   blogObject = new Blog(helper.initialBlogs[3])
   await blogObject.save()
+
+  await User.deleteMany({})
+  await api 
+    .post('/api/users')
+    .send({
+      username: "jaakko",
+      name: "Jaakko",
+      password: "vakeva"
+    })
+
+  await api 
+    .post('/api/users')
+    .send({
+      username: "jordan",
+      name: "Jordan Peterson",
+      password: "peterson"
+    })
+
+
 })
 
 test('returns blogs in json', async () => {
@@ -39,15 +65,26 @@ test('returned blogs have an identification field called id', async () => {
 
 
 test('a valid blog can be added', async () => {
+
+  
+  const res = await api
+    .post('/api/login')
+    .send({
+      username: 'jaakko',
+      password: 'vakeva'
+    })
+
+  let token = res.body.token
+
   const newBlog = {
-    title: 'This is a test blog',
-    author: 'Tester',
+    title: 'This is a test blog by jaakko',
     url: 'http://www.google.com',
     likes: 4,
   }
 
   await api
     .post('/api/blogs')
+    .set('Authorization', `bearer ${token}`)
     .send(newBlog)
     .expect(200)
     .expect('Content-Type', /application\/json/)
@@ -61,13 +98,22 @@ test('a valid blog can be added', async () => {
 test('if likes field is not given a value it is set to zero', async () => {
   const newBlog = {
     title: 'No likes field here',
-    author: 'Zero Man',
     url: 'http://www.google.com',
   }
+
+  const res = await api
+    .post('/api/login')
+    .send({
+      username: 'jaakko',
+      password: 'vakeva'
+    })
+
+  let token = res.body.token
 
   await api
     .post('/api/blogs')
     .send(newBlog)
+    .set('Authorization', `bearer ${token}`)
     .expect(200)
     .expect('Content-Type', /application\/json/)
 
@@ -81,10 +127,35 @@ test('if title or author is empty return 400 bad request', async () => {
     likes: 5
   }
 
+  const res = await api
+    .post('/api/login')
+    .send({
+      username: 'jaakko',
+      password: 'vakeva'
+    })
+
+  let token = res.body.token
+
+  await api
+    .post('/api/blogs')
+    .set('Authorization', `bearer ${token}`)
+    .send(newBlog)
+    .expect(400)
+
+})
+
+test ('if there is not a token in the request return 401 unauthorized', async () => {
+  const newBlog = {
+    title: 'This is a test blog by jaakko',
+    url: 'http://www.google.com',
+    likes: 4,
+  }
+
   await api
     .post('/api/blogs')
     .send(newBlog)
-    .expect(400)
+    .expect(401)
+    .expect('Content-Type', /application\/json/)
 
 })
 

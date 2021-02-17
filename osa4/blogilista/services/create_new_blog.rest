@@ -1,10 +1,9 @@
 POST http://localhost:3003/api/blogs/
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RpIiwiaWQiOiI2MDJkMTVjMGMxMzUzZjNhYzBkZDJjOTUiLCJpYXQiOjE2MTM1Njc0MzN9.Cw1zQpZCM5I1uwVLv4bOHvAkj6prHrk2sBy1Yvdl0Oc
 
 {
-    "title": "Kaikki Vitun Hitit 2",
-    "author": "Petri",
-    "url": "http://www.youtube.com",
-    "likes": "420",
-    "userId": "601add89c0bf4f03b8d565f8"
+    "title": "testi",
+    "url": "http://www.iltalehti.fi",
+    "likes": "10"
 }

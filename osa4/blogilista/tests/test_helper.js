@@ -16,16 +16,29 @@ const initialBlogs = [
     },
     {
       title: "Matti Nykänen söi kolme litraa mansikoita",
-      author: "Mansikka Matti",
+      author: "Jaakko",
       url: "https://www.is.fi/viihde/art-2000000214135.html",
       like: 100,
     },
     {
-      title: "Koirat",
-      author: "Pluto",
+      title: "Lobsters",
+      author: "Jordan Peterson",
       url: "https://wikipedia.org",
       like: 3,
     },
+]
+
+const initialUsers = [
+  {
+    username: "jaakko",
+    name: "Jaakko",
+    password: "vakeva"
+  },
+  {
+    username: "mluukkai",
+    name: "Matti Luukkanen",
+    password: "salainen"
+  }
 ]
 
 const nonExistingId = async () => {
@@ -54,6 +67,6 @@ const usersInDb = async () => {
 
 
 module.exports = {
-    initialBlogs, nonExistingId, blogsInDb, usersInDb
+    initialBlogs, nonExistingId, blogsInDb, usersInDb, initialUsers
 }
 
